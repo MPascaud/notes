@@ -1,0 +1,106 @@
+Outils système :
+Df pour espace disque
+Top processus en cours actuellement (interactif)
+Ps
+kill
+
+Outils reseau :
+Ifconfig afficher et configurer interfaces réseaux du systeme
+Ping envoie un paquet vers un autre serveur
+Netstat affiche les connexions sur notre serveur
+Route
+Traceroute
+Nslookup dig host
+
+Fichiers de configuration :
+Hosts definit une ip, un nom manuellement
+Networks donne un nom logique a un réseau
+host.conf “permet de dire si c’est en fat un fichier de configuration qui résout les noms de domaine ou si c’est le service ‘bind’ à travers les serveurs DNS”
+Resolve.conf definit les serveurs de noms - donc les dns
+Interface - se situe dans /etc/network - permet de configurer l’ensemble des interfaces système concernant le réseau
+“Vous pouvez définir que votre interface ethernet qui s’appelle eth0 elle utilise du DHCP, donc en gros elle récupère une IP de votre serveur DHCP, ou alors vous lui définissez une IP en statique”
+
+
+
+https://github.com/st3w4r/42-roger-skyline-1?files=1
+
+Sed
+http://www.commentcamarche.net/faq/9536-sed-introduction-a-sed-part-i
+https://doc.ubuntu-fr.org/sed
+https://openclassrooms.com/courses/la-commande-sed
+https://www.shellunix.com/sed.html
+http://www.commentcamarche.net/forum/affich-1459599-afficher-une-ligne-particuliere-d-un-fichier
+
+Commandes réseau
+http://igm.univ-mlv.fr/ens/Licence/L3/2008-2009/Reseau/td06.php
+
+https://www.shellunix.com/regexp.html
+
+Configurer adresse MAC
+http://www.linux-france.org/~mdecore/linux/doc/memo2/node26.html
+http://www.octetmalin.net/linux/tutoriels/ifconfig-changer-adresse-mac-de-votre-carte-interface-reseau.php
+
+https://fr.wikibooks.org/wiki/Administration_r%C3%A9seau_sous_Linux/Configuration_r%C3%A9seau#Adresse_IP
+
+Liste interfaces réseaux
+https://openclassrooms.com/forum/sujet/que-signifie-ces-interfaces-reseaux
+
+nmap
+https://mxtoolbox.com/SuperTool.aspx?action=scan%3a10.51.1.253&run=toolpage
+
+
+Réseaux tcp/ip
+https://openclassrooms.com/courses/apprenez-le-fonctionnement-des-reseaux-tcp-ip/le-service-dns
+
+Expressions régulières
+https://www.shellunix.com/regexp.html
+
+Debian
+https://cdiese.fr/installation-de-debian-sur-une-machine-virtuelle-virtualbox/
+
+Commandes de gestion de packages
+http://www.xenetis.org/commandes_de_base_debian_ubuntu.html
+
+Installation apt-get install
+https://openclassrooms.com/courses/reprenez-le-controle-a-l-aide-de-linux/installer-des-programmes-avec-apt-get
+
+Ssh
+https://www.supinfo.com/articles/single/6435-service-ssh-debian
+
+Structure des répertoires sous unix
+http://www.linux-france.org/article/sys/fichiers/fichiers-2.html
+
+Sid : identifiant de session
+Gid : identifiant de groupe - pigd
+
+Commande c dans VM pour passer en scale mod
+
+Clés rsa
+http://www.kommunauty.fr/article-669-authentification-ssh-par-cles-rsa
+https://www.it-connect.fr/chapitres/authentification-ssh-par-cles/
+https://doc.fedora-fr.org/wiki/SSH_:_Authentification_par_cl%C3%A9
+https://doc.ubuntu-fr.org/ssh
+
+
+http://www.fil.univ-lille1.fr/~wegrzyno/portail/PAC/Doc/TP-Certificats/tp-certif002.html
+https://www.aidoweb.com/tutoriaux/securiser-acces-ssh-paire-cles-rsa-generation-cles-application-serveur-646
+http://www.linux-france.org/prj/edu/archinet/systeme/ch13s03.html
+
+
+Tables de partitionnement
+https://doc.ubuntu-fr.org/fdisk
+
+Afficher espace
+partition : df // df -h
+Répertoire : du // du -h
+
+Cron
+https://technique.arscenic.org/commandes-linux-de-base/article/cron-gestion-des-taches-planifiees
+
+& pour commande en backgound
+
+iptables
+https://doc.ubuntu-fr.org/iptables
+
+
+
