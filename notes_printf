@@ -1,0 +1,163 @@
+CONSIGNES
+
+Valeur de retour
+Si flags et chaines pas dans même ordre
+Plusieurs arguments, récupérer leur type (objective-c l’utilise)
+Man 3 printf
+Trois . : ellipse
+Afficher un %
+Test-driven
+site de test Makefile pour compiler librairie
+
+Pas de gestion de buffer
+Ss : string
+p : pointeur
+Ddi : nombre
+Oo : octal
+Uu : décimal non signé
+Xx : hexa
+Cc : unsigned char, avec l : célamerd
+%% : %
+
+Flags 
+#
+Avec les spécificateurs a, A, e, E, g ou G le séparateur de la partie décimale est le point.
+Avec les spécificateurs x ou X, le préfixe 0x ou 0X est ajouté.
+Enfin avec le spécificateur o, le préfixe ajouté est 0. 
+0
+Des zéro sont affichés devant le nombres afin d'atteindre la gabarit demandé. 
+-
+Le résultat de la conversion est aligné à gauche. 
+Espace
+Un espace sera placée devant les nombres positifs. 
++
+Le signe plus '+' sera affiché devant les nombres positifs. 
+Gerer la taille minimum du champ
+Gerer la précision !ne pas oublier l’*!
+
+Gérer les flags - modificateurs de longueur
+Ici, une conversion entière correspond à d, i, o, u, x ou X. 
+hh Le paramètre est de type signed char ou unsigned char. 
+h short int ou unsigned short int. 
+j intmax_t ou uintmax_t. <Stdint.h>
+z size_t. 
+l long int ou unsigned long int.
+En C99, ce modificateur s'applique aussi au caractère et au chaîne de caractères pour préciser qu'il s'agit de la version étendue (wint_t et wchar_t). 
+ll long long int ou unsigned long long int. 
+
+Partie bonus
+Conversions plus delicates 
+eE
+fF “default is %.6f”
+gG
+aA
+n
+
+Flags plus délicats
+*
+$
+L
+‘
+
+Flags non existants
+%b pour afficher en binaire
+%r pour afficher une chaine avec des caractères non imprimables
+%k pour afficher une date a un format iso quelconque
+
+Gestion de modifier pour les couleurs (cf sujet)
+
+Consignes
+Gerer les erreurs
+ft_printf
+fournir un Makefile qui compilera une libftprintf.a. Cette lib sera linké
+à notre main de test pour vous donner votre résultat.
+Auteur
+Write, malloc, free, exit, man 3 stdarg
+
++- == -+
+-0 “0 is ignored”
++0 là ça passe
+espace+ —>”espace is ignored”
+. Avec s et d
+Avec deux espaces
+
+https://fr.wikipedia.org/wiki/Fonction_variadique
+
+Stdarg
+Man 3 printf
+
+Binaire
+ternaire
+
+déclaration variable de type va_list : va_list ap
+
+void va_start(va_list ap, last); 
+Last : dernier paramètre connu
+
+type va_arg(va_list ap, type); 
+Type et valeur de l’argument suivant
+
+void va_end(va_list ap);
+
+void va_copy(va_list dest, va_list src); 
+
+http://www.cypress.com/file/54441/download
+
+https://www.lix.polytechnique.fr/~liberti/public/computing/prog/c/C/FUNCTIONS/format.html
+
+http://ftprintf.com/
+
+http://nicolasj.developpez.com/articles/format/
+
+
+%|# 0-+|taille|.precision|hh/h/ll/l/j/z|sScCdDioOuUxXp%
+%[drapeaux][gabarit][.précision][modificateur]spécificateur
+%[flags][minimum field width][period][precision maximum field width][argument type]
+
+
+00042      “%-10.5d”,42
+
+Double quote
+Backslash
+\a bell
+\b backspace
+\f form feed
+\n newline
+\r carriage return
+\t tab
+\v vert tab
+
+%c
+print a single character
+%d 
+print a decimal (base 10) number
+%e
+print an exponential floating-point number
+%f
+print a
+floating-point number
+%g
+print a general-format floating-point number
+%i
+print an integer in base 10
+%o
+print a number in octal (base 8)
+%s
+print a string of characters
+%u
+print an unsigned decimal (base 10) number
+%x
+print a number in hexidecimal (base 16)
+%%
+print a percent sign (\% also works)
+
+C character Trigraph 
+  #         ??=  
+  [         ??(  
+  ]         ??)  
+  {         ??<  
+  }         ??>  
+  \         ??/  
+  |         ??!  
+  ~         ??-  
+  ^         ??' 
