@@ -102,5 +102,4 @@ https://technique.arscenic.org/commandes-linux-de-base/article/cron-gestion-des-
 iptables
 https://doc.ubuntu-fr.org/iptables
 
-
-
+ echo "salut martin" | mail -s "test" mpascaud@student.42.fr
