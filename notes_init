@@ -102,4 +102,23 @@ https://technique.arscenic.org/commandes-linux-de-base/article/cron-gestion-des-
 iptables
 https://doc.ubuntu-fr.org/iptables
 
- echo "salut martin" | mail -s "test" mpascaud@student.42.fr
+echo "salut martin" | mail -s "test" mpascaud@student.42.fr
+
+Protocols tcp udp
+
+Preroutine forward postroutine 
+https://i.stack.imgur.com/4wdkF.png
+
+/etc/passwd
+https://www.cyberciti.biz/faq/understanding-etcpasswd-file-format/
+http://www.commentcamarche.net/contents/646-linux-gestion-des-utilisateurs
+
+Scripts
+https://abs.traduc.org/abs-fr/ch02.html
+
+Sources de package
+https://wiki.debian.org/fr/SourcesList
+https://www.debian.org/doc/manuals/debian-faq/ch-uptodate.fr.html
+https://www.debian.org/doc/manuals/debian-reference/ch02.fr.html#_system_wide_upgrade
+
+
