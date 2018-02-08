@@ -20,8 +20,6 @@ Resolve.conf definit les serveurs de noms - donc les dns
 Interface - se situe dans /etc/network - permet de configurer l’ensemble des interfaces système concernant le réseau
 “Vous pouvez définir que votre interface ethernet qui s’appelle eth0 elle utilise du DHCP, donc en gros elle récupère une IP de votre serveur DHCP, ou alors vous lui définissez une IP en statique”
 
-
-
 https://github.com/st3w4r/42-roger-skyline-1?files=1
 
 Sed
@@ -96,29 +94,55 @@ Répertoire : du // du -h
 
 Cron
 https://technique.arscenic.org/commandes-linux-de-base/article/cron-gestion-des-taches-planifiees
+Dans /etc : nano crontab
+http://debian-facile.org/doc:systeme:crontab
+Crontab -e
+Crontab -l
+Crontab -r
+Ne pas mettre user
+https://doc.fedora-fr.org/wiki/CRON_:_Configuration_de_t%C3%A2ches_automatis%C3%A9es
+http://hardware-libre.fr/2014/03/8-exemples-pour-maitriser-linux-cron/
+
+
 
 & pour commande en backgound
 
 iptables
 https://doc.ubuntu-fr.org/iptables
 
-echo "salut martin" | mail -s "test" mpascaud@student.42.fr
+ echo "salut martin" | mail -s "test" mpascaud@student.42.fr
 
-Protocols tcp udp
+ Protocols tcp udp
 
-Preroutine forward postroutine 
-https://i.stack.imgur.com/4wdkF.png
+ Preroutine forward postroutine 
+ https://i.stack.imgur.com/4wdkF.png
 
-/etc/passwd
-https://www.cyberciti.biz/faq/understanding-etcpasswd-file-format/
-http://www.commentcamarche.net/contents/646-linux-gestion-des-utilisateurs
+ /etc/passwd
+ https://www.cyberciti.biz/faq/understanding-etcpasswd-file-format/
+ http://www.commentcamarche.net/contents/646-linux-gestion-des-utilisateurs
 
-Scripts
-https://abs.traduc.org/abs-fr/ch02.html
+ Scripts
+ https://abs.traduc.org/abs-fr/ch02.html
 
-Sources de package
-https://wiki.debian.org/fr/SourcesList
-https://www.debian.org/doc/manuals/debian-faq/ch-uptodate.fr.html
-https://www.debian.org/doc/manuals/debian-reference/ch02.fr.html#_system_wide_upgrade
+ Sources de package
+ https://wiki.debian.org/fr/SourcesList
+ https://www.debian.org/doc/manuals/debian-faq/ch-uptodate.fr.html
+ https://www.debian.org/doc/manuals/debian-reference/ch02.fr.html#_system_wide_upgrade
+
+ If shell
+ https://openclassrooms.com/courses/reprenez-le-controle-a-l-aide-de-linux/les-conditions-4
+ https://www1.zonewebmaster.eu/serveur-debian-automatisation:scripts-debian-alerte-modification-fichier
+
+
+ Configuration réseau Debian
+ https://www.debian.org/doc/manuals/debian-reference/ch05.fr.html
+ https://dunglas.fr/2008/07/php-mail-debian-ubuntu/
+
+ Serveurs smtp
+ http://www.serversmtp.com/fr/liste-serveur-smtp
+
+ Md5sum
+ http://debian-facile.org/doc:systeme:openssl:openssl_checksum
+
 
 
