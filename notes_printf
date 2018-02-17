@@ -1,7 +1,7 @@
 CONSIGNES
 
 Valeur de retour
-Si flags et chaines pas dans même ordre
+Si flags et chaînes pas dans même ordre
 Plusieurs arguments, récupérer leur type (objective-c l’utilise)
 Man 3 printf
 Trois . : ellipse
@@ -19,21 +19,6 @@ Xx : hexa
 Cc : unsigned char, avec l : célamerd
 %% : %
 
-Flags 
-#
-Avec les spécificateurs a, A, e, E, g ou G le séparateur de la partie décimale est le point.
-Avec les spécificateurs x ou X, le préfixe 0x ou 0X est ajouté.
-Enfin avec le spécificateur o, le préfixe ajouté est 0. 
-0
-Des zéro sont affichés devant le nombres afin d'atteindre la gabarit demandé. 
--
-Le résultat de la conversion est aligné à gauche. 
-Espace
-Un espace sera placée devant les nombres positifs. 
-+
-Le signe plus '+' sera affiché devant les nombres positifs. 
-Gerer la taille minimum du champ
-Gerer la précision !ne pas oublier l’*!
 
 Gérer les flags - modificateurs de longueur
 Ici, une conversion entière correspond à d, i, o, u, x ou X. 
@@ -74,12 +59,6 @@ fournir un Makefile qui compilera une libftprintf.a. Cette lib sera linké
 Auteur
 Write, malloc, free, exit, man 3 stdarg
 
-+- == -+
--0 “0 is ignored”
-+0 là ça passe
-espace+ —>”espace is ignored”
-. Avec s et d
-Avec deux espaces
 
 https://fr.wikipedia.org/wiki/Fonction_variadique
 
@@ -110,7 +89,8 @@ http://ftprintf.com/
 http://nicolasj.developpez.com/articles/format/
 
 
-%|# 0-+|taille|.precision|hh/h/ll/l/j/z|sScCdDioOuUxXp%
+
+%|#espace0-+|taille|.precision|hh/h/ll/l/j/z|sScCdDioOuUxXp%
 %[drapeaux][gabarit][.précision][modificateur]spécificateur
 %[flags][minimum field width][period][precision maximum field width][argument type]
 
@@ -161,3 +141,114 @@ C character Trigraph
   |         ??!  
   ~         ??-  
   ^         ??' 
+
+
+Flags 
+#
+Avec les spécificateurs a, A, e, E, g ou G le séparateur de la partie décimale est le point.
+Avec les spécificateurs x ou X, le préfixe 0x ou 0X est ajouté.
+Enfin avec le spécificateur o, le préfixe ajouté est 0. 
+0
+Des zéro sont affichés devant le nombres afin d'atteindre la gabarit demandé. 
+-
+Le résultat de la conversion est aligné à gauche. 
+Espace
+Un espace sera placée devant les nombres positifs. 
++
+Le signe plus '+' sera affiché devant les nombres positifs. 
+Gerer la taille minimum du champ
+Gerer la précision !ne pas oublier l’*!
+
++- == -+
+-0 “0 is ignored”
++0 là ça passe
+espace+ —>”espace is ignored”, idem pour espace-
+. Avec s et d
+Avec deux espaces
+attention si 0 + un autre zero pour taille
+
+%|#espace0-+|taille|.precision|hh/h/ll/l/j/z|sScCdDioOuUxXp%
+%[drapeaux][gabarit][.précision][modificateur]spécificateur
+%[flags][minimum field width][period][precision maximum field width][argument type]
+
+Unicode
+https://forum.intra.42.fr/topics/15759/messages?page=1#83040
+https://openclassrooms.com/courses/mettez-des-accents-dans-vos-programmes-avec-le-type-wchar-t
+
+wchar_t , un autre
+Str >> 12 && Oxbfvdsfv 0xblabla
+
+Les -W-W-W
+
+d i 16
+o u x x 16
+C 16
+S 8
+Hh 8
+H 16
+L 32
+Ll 64
+
+Avec d : pas #
+Zero, espace, moins, plus, taille, precision, 
+
++ : 
+quand + : osef de ‘ ‘
+ajoute ‘+’ devant les nombres positifs
+
+‘ ‘ :
+ajoute un espace devant les nombres positifs
+
+zéro :
+zéros affichés pour atteindre le gabarit demandé
+
+- :
+alignement à gauche
+
+gabarit :
+taille minimale
+
+precision :
+nombre minimum de chiffres
+
+
+
+
+
+nombre chiffres +1 si + ou ‘ ‘
+nombre total    +1 si + ou ‘ ‘
+si -{si 0
+compter chiffres dans nombre
+
+
+taille totale = +/espace + gabarit/precision + nchiffres
+
+si gabarit > precision
+et l’inverse
+- et +
+et espace ?
+
+%0+5d\n. 4
+
+
+
+gabarit > j + i + nbchiffres
+
+
+
+jiibsv (wchar_t, char*?)
+{
+c[0] = str >> 16 & 0b11111 + Oxblabla
+}
+
+ekvesfv(??)
+{
+	c = NULL
+	c = ft_dessus(
+}
+
+
+
+
+
+
