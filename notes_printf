@@ -178,7 +178,8 @@ https://openclassrooms.com/courses/mettez-des-accents-dans-vos-programmes-avec-l
 wchar_t , un autre
 Str >> 12 && Oxbfvdsfv 0xblabla
 
-Les -W-W-W
+Les -W-W-W<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<———————————————————
+Valeur de retour<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<————————————————————
 
 d i 16
 o u x x 16
@@ -188,8 +189,8 @@ Hh 8
 H 16
 L 32
 Ll 64
-
-Avec d : pas #
+—————————————————————————————
+AVEC d : pas #
 Zero, espace, moins, plus, taille, precision, 
 
 + : 
@@ -230,10 +231,7 @@ et espace ?
 
 %0+5d\n. 4
 
-
-
-gabarit > j + i + nbchiffres
-
+—————————————————————
 
 
 jiibsv (wchar_t, char*?)
@@ -246,6 +244,55 @@ ekvesfv(??)
 	c = NULL
 	c = ft_dessus(
 }
+
+————————————————————————————————————————
+%|#espace0-+|taille|.precision|hh/h/ll/l/j/z|sScCdDioOuUxXp%
+%[drapeaux][gabarit][.précision][modificateur]spécificateur
+%[flags][minimum field width][period][precision maximum field width][argument type]
+
+
+AVEC c :
+
+
+pad #
+pad espace
+pad zéro
+pad plus
+pad precision
+
+moins : calage à gauche
+gabarit
+modificateurs : seulement le ‘l’
+
+
+——————————————————————————————————————————————————
+AVEC s :
+
+pad #
+pad espace
+pad zéro
+pad plus
+pad precision
+
+moins : calage à gauche
+gabarit
+precision : s’arrête avant
+l ???
+
+
+
+
+
+
+
+entre . et .0
+
+
+
+
+
+
+
 
 
 
