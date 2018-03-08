@@ -1,0 +1,22 @@
+Perror
+Strerror
+
+
+./filler_vm -f maps/map00 -p2 ./players/abanlin.filler -p1 ./players/carli.filler
+
+gcc -o mpascaud.filler mpascaud.filler.c ; ./filler_vm -p1 ./mpascaud.filler -p2 players/carli.filler -f maps/map00
+
+
+il ecrit dans la sortie standart et perturbe la vm, il faut que tu utilise un autre file descriptor comme par exemple le tty d’une console (tu peux ecrire dans la console de ton choix avec ce systeme)
+
+ft_strdel
+
+
+plateau
+digit
+piece
+. Ou *
+
+Les -W-W-W
+
+#define FDtest open("/dev/ttys001", O_RDWR)

@@ -88,6 +88,12 @@ http://ftprintf.com/
 
 http://nicolasj.developpez.com/articles/format/
 
+https://fr.wikipedia.org/wiki/UTF-8
+http://www.exploringbinary.com/twos-complement-converter/
+http://sebastienguillon.com/test/javascript/convertisseur.html
+https://fr.wikibooks.org/wiki/Programmation_C/Types_de_base
+
+
 
 
 %|#espace0-+|taille|.precision|hh/h/ll/l/j/z|sScCdDioOuUxXp%
@@ -131,7 +137,7 @@ print a number in hexidecimal (base 16)
 %%
 print a percent sign (\% also works)
 
-C character Trigraph 
+C character Trigraph <<<<<<<<<<<<<<<———————————————————————
   #         ??=  
   [         ??(  
   ]         ??)  
@@ -178,8 +184,6 @@ https://openclassrooms.com/courses/mettez-des-accents-dans-vos-programmes-avec-l
 wchar_t , un autre
 Str >> 12 && Oxbfvdsfv 0xblabla
 
-Les -W-W-W<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<———————————————————
-Valeur de retour<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<————————————————————
 
 d i 16
 o u x x 16
@@ -272,7 +276,6 @@ pad #
 pad espace
 pad zéro
 pad plus
-pad precision
 
 moins : calage à gauche
 gabarit
@@ -285,7 +288,145 @@ l ???
 
 
 
-entre . et .0
+
+
+
+—————————————————————
+AVEC C :
+
+pad #
+pad espace
+pad zéro
+pad plus
+pad precision
+pad modificateur
+
+moins : calage à gauche
+gabarit
+
+
+dd 11|011101
+
+11000011 10011101
+
+
+
+c >> 6 : 00000011
+
+c >> 6 + 11000000
+       = 11000011
+
+
+
+c >> 0 =           11011101
+c >> 0 & 0b1111 =  00001101
+
+
+
+11100000 10000011 10100000
+
+
+—————————————————————————————————————
+AVEC S :
+
+pad #
+pad espace
+pad zero
+pad plus
+pad précision
+pad modificateur
+
+moins
+gabarit
+
+
+
+
+Les -W-W-W<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<———————————————————————————————
+oOuUxXp<<<<<<<<<<<<<<<<<<<<<——————————————————————————————————————
+valeurs max<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<———————————————————————————————————————
+les fonctions appelées une seule fois dans même fichier que l’appelante<———————————————————
+valeur de retour D oO <<<<<<<<<——————————————————————————————————————————
+
+
+%|#espace0-+|taille|.precision|hh/h/ll/l/j/z|sScCdDioOuUxXp%
+%[drapeaux][gabarit][.précision][modificateur]spécificateur
+%[flags][minimum field width][period][precision maximum field width][argument type]
+
+
+————————————————————————————————————————————————————————————————————————————————————
+AVEC D :
+
+blop
+
+
+
+—————————————————————————————————————————————————————————————————————————————————————————
+AVEC o :
+
+
+
+
+
+
+
+bonus
+binaire
+octal négatif
+
+
+
+
+AVEC x
+- 0 diese
+
+
+
+AVEC p
+pad espace
+pad zéro
+pad diese
+pad plus
+pad precision
+pad modificateur
+
+gabarit
+moins
+
+
+
+
+
+AVEC %
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
