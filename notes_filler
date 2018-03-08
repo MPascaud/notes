@@ -11,7 +11,8 @@ il ecrit dans la sortie standart et perturbe la vm, il faut que tu utilise un au
 
 ft_strdel
 
-
+Opp
+Me
 plateau
 digit
 piece
@@ -20,3 +21,14 @@ piece
 Les -W-W-W
 
 #define FDtest open("/dev/ttys001", O_RDWR)
+
+
+free
+data->board
+data->piece
+data->war[war]
+data->shapiece[shapiece]
+data->war
+data->shapiece
+war = 0
+shapiece = 0
