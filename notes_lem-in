@@ -1,0 +1,305 @@
+Dépassement nombre de fourmis - int max etc
+cas : 2147483648 fourmis
+
+Si start et end sont la même salle
+
+Si après end ou start c’est pas une salle - hors commentaire —> “error”
+
+
+Noms uniques mais coordonnées peuvent être les mêmes
+
+
+bellman ford plus court chemin c
+
+Maps de test
+https://github.com/fbouquet42/PublicTester/tree/master/test_lem-in
+https://github.com/emilwallner/Lem-in-Checker
+
+Page de correction
+https://github.com/Binary-Hackers/42_Corrections/tree/master/00_Projects/02_Algorithmic/lem-in
+
+Fichier auteur
+
+Norme
+
+leaks
+
+il peut y avoir des commentaires
+
+commandes autre que ##start et ##end—>possible
+
+composition de la fourmilière répétée sur la sortie
+
+commandes et commentaires répétés sur la sortie
+
+
+
+“La première ligne non conforme ou vide entraîne la fin de l’acquisition de la fourmilière”
+
+Aucune salle—>erreur
+
+Aucune fourmi—>erreur
+
+Pad start / pad end—>erreur
+
+Aucun chemin possible—>erreur
+
+si numéro fourmi = 0 ou >nombre fourmis —>erreur
+
+si liens au milieu de salles, ou inverse—>erreur
+
+si tube de start vers end : une par une
+
+espace dans nom de salle : partir de la droite de la ligne
+
+chemin optimisé—>bonus
+si plusieurs start—>bonus ?
+si plusieurs end—>bonus ?
+si start et end sont même salle—>bonus ?
+
+répétition de nom de salles
+
+ligne non valide—>error
+
+ligne vide : stop lecture
+
+si nombre fourmis pas conforme
+
+check connection : ft
+
+les tags
+
+“-“ uniquement pour tubes
+
+le makefile si fichier modifié
+
+mar
+mar1ke
+vin
+ke2vin
+
+
+mar-ke2vin?
+mar1ke-vin
+
+mar-ke—>vin
+mar——>ke-vin
+
+si noms faux
+si pas de end/ pas de start
+plusieurs tubes
+connexion entre start et end
+
+
+        2___3
+start___|   |
+    |       |
+    |___4___6_end
+        |      |
+        5______7
+
+
+
+https://www.apprendre-en-ligne.net/graphes/graphes.pdf
+http://www.nymphomath.ch/graphes/corriges.pdf
+https://fr.wikipedia.org/wiki/R%C3%A9seau_de_flot
+
+——————————————————————————————————————————————————————————————————————————————————
+
+afficher fichier si pas error
+
+distance de chaque salle
+
+liste des listes de chemins par ordre
+
+
+pour chaque chemin, trajet pour une fourmi, trajet pour toutes
+trajet pour toutes du chemin plus court - trajet pour une sur chemin B = opti
+si négatif, ne pas utiliser chemin B
+faire de même avec autres chemins, jusqu’à opti négative
+
+deux fourmis de deux salles différentes peuvent arriver en même temps à end
+
+les leaks
+
+way = -1 si impasse
+place = -1 si après end / hors fourmilière
+
+
+ERROR
+
+
+
+‘ dans nom de salle
+
+
+
+deux noms identiques
+
+ligne \n
+espace à la fin de la ligne
+espace apres end
+
+
+
+
+
+
+tags
+
+
+
+
+si fichier est null /dev/zero
+int max
+previous
+free variables
+
+https://github.com/kgricour/lem_in
+
+
+leaks
+remplacer printf
+
+makefile
+lem-in.h
+lem-in.c
+gnl
+auteur
+
+
+
+
+
+main
+ft_firsts_filist_namelist_argc
+ft_ants
+ft_print_anthill
+
+
+—>gnl.c
+ft_gnl
+ft_valid_line
+ft_step_one
+
+
+—>gnl_auxis.c
+ft_at_least_one_room
+ft_bad_room
+ft_filstnew DANS gnl.c
+
+gnl_step_two.c
+ft_step_two
+ft_already & ft_new_name DANS gnl.c (step 2)
+
+
+gnl_step_three.c
+ft_step_three
+ft_not_yet_second_room & ft_not_yet & ft_not_yet_first_room DANS gnl.c
+
+
+——————————————
+
+
+—>build1.c
+ft_build
+ft_first_roomlist(var);
+ft_init(var->roomlist);
+
+
+build2_name.c
+ft_name(var->filistart, var->roomlist);
+ft_this_is_new_room
+ft_roomlstnew
+ft_cpyname
+
+
+build3_place_start_end.c
+ft_place_start(var->filistart, var->roomlist);
+ft_disizit
+ft_place_end(var->filistart, var->roomlist);
+
+
+
+build4_tunnels.c
+ft_tunnels(var->filistart, var->roomlist);
+ft_malloc_tunnels
+ft_link_tunnels
+ft_malloc_beftunnels
+ft_link_beftunnels
+
+build4_tunnels_2.c
+ft_disiz_beftunnel
+ft_beflink
+ft_disiz_tunnel
+ft_link
+
+
+build5_place
+ft_place(var->filistart, var->roomlist);
+ft_place_by_beftunnels
+ft_place_by_tunnels
+
+
+possible_to_way.c
+ft_possible
+ft_start_to_end. ft_check_connection 
+
+
+way1.c
+
+ft_way           ft_roomlist_to_first ft_no_zero 
+
+way2.c
+ft_searching_way(ft_search_previous,ft_search_next)
+
+way3_is_there1.c
+ft_is_there_a_way(ft_reset,ft_reverse,ft_search_first_reverse,
+
+way3_is_there2.c
+ft_length ft_smallest_biggest ft_search_other_reverses(ft_room_max))
+
+
+
+
+
+listlist.c
+ft_first_listlist
+ft_listlist (ft_listlistnew, 
+
+listlist_waylist.c
+ft_waylist(ft_waylist_first,ft_build_waylist, ft_waylistnew,))
+
+
+free.c
+
+ft_free ft_free_no_listlist ft_free_only_two
+
+free_auxis.c
+(ft_free_filist_namelist,ft_free_roomlist(ft_free_beftunnels,ft_free_tunnels),ft_free_listlist)
+
+
+
+
+
+
+fonctions supprimées
+ft_ways_to_zero
+ft_takens_to_one
+ft_which_max_and_losts_to_zero
+ft_show_roomlist
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,251 @@
+html5 contenu
+css3 présentation
+
+.html
+Balises en paire <blabla>  </blabla>
+Balises orphelines <blabla/>  ou <blabla>
+Attributs <balise attribut=“valeur”>
+
+Doctype <!DOCTYPE html>
+Balise html
+<Head>
+<body>
+Encodage charset <meta charset="utf-8" />
+<title>
+<!-- Ceci est un commentaire -->
+<image />
+<br />.  aller à la ligne
+<p>paragraphe</p>
+importance des titres<h1></h1>
+<h2></h2>
+Un peu plus important dans le texte (italique)<em></em>
+Encore un peu plus(gras) <strong></strong>
+Surligner <mark></mark>
+
+Liste à puces :
+<ul>
+<li> blabla </li>
+<li> blabla2 </li>
+</ul>
+Pour numéros : ol à la place de ul
+
+————————————————————————————————————————————————————————————————————————————————————————
+Liens :
+<a href=“http://etc.com”>apparition</a>
+Possible de lier à page2.html si dans le même dossier
+<a href=“#mot-clé”>blabla</a>
+plus loin : id=“mot-clé”
+infobulle : title=“coucou”
+lien vers nouvel onglet/fenêtre : target=“_blank”
+envoie de mail : href=“mailto:truc@machin.com”
+télécharger : href=“fichier.zip” dans même dossier
+———————
+jpeg(photos), png(on peut mettre du transparent), gif(animation)
+<img src=“image.jpg” alt=“descriptif”/>
+lien de miniature vers grande : <a href=“grande.jpg”><img src=“mini.jpg” alt=“blabla” /></a>
+
+pour libeller l’image :
+<figure>
+<img src=“eofv.png” alt=“blabla” />
+<figcaption>libellé</figcaption>
+</figure>
+—————————————————————————————————————————————————————————————————————————————————————————————————————————
+ajouter du css
+
+méthode 1 :
+dans head, <link rel=“stylesheet” href=“style.css” />
+méthode 2 :
+<style>
+p
+{
+color: blue;
+}
+</style>
+méthode 3 :
+<p style=“color: blue;”>asdfghjk</p>
+
+
+color: blue;
+
+/*commentaire*/
+
+class=“nom de la classe”
+et dans le .css : .introduction
+OU
+id=“trucmuche”
+et dans le .css : #trucmuche
+(astuce) * pour toutes les balises
+utiliser class quand deux éléments
+
+
+balises génériques :
+<span></span> dans paragraphe
+<div></div> en dehors
+
+h1 em signifie le em du h1
+
+—————————————————————————————————————————————————————————————————————————————————————————————————————
+font-size:24px
+on peut mettre small, medium etc à la place de 24px
+ou 1.5em, 1.3em (unité adaptative)
+
+font-family: 1ère police, 2e police, etc (si l’ordi n’a pas)
+fontsquirrel.com
+(dans le .css)@font-face {
+font-family:”nom de la police”;
+src:url(“chemin/chemin”);
+}
+
+em
+{
+    font-style: normal;
+}
+—>les em sont en normal (si navigateur met automatiquement en italique)
+font-style:italic;
+
+   De même,
+—>font-weight
+bold : en gras
+normal : tmtc
+
+   De même,
+—>text-decoration
+underline:souligné
+ligne-th:barré
+overline:ligne au-dessus
+blink:clignotant
+none:normal
+
+   De même,
+—>text-align
+left(par défaut)
+center
+right
+justify(texte justifié(toute la place))
+
+
+.imageflottante
+{
+    float: left;
+}
+
+.dessous
+{
+    clear: both;
+}
+ou clear:left ou right, si on veut que ça fonctionne sous des flottants juste gauches
+
+
+
+————————————————————————————————————————————————————————————————————————————————————————
+
+color:blabla
+
+couleurs
+white silver gray black red maroon lime green yellow olive blue navy fuchsia purple aqua teal
+
+#FF5A28
+Les deux premiers indiquent une quantité de rouge, les deux suivants une quantité de vert et les deux derniers une quantité de bleu
+#FA3 équivaut à écrire #FFAA33
+
+
+
+background-color
+à mettre dan la balise body(dans le .css, hein) pour toute la page
+applicable pour n’importe quel élément
+
+
+background-image: url("neige.png");
+
+
+background-attachment: fixer le fond
+fixed
+scroll
+
+
+background-repeat: répétition du fond
+no-repeat
+repeat-x(horizontalement)
+repeat-y(tmtc)
+repeat
+
+
+background-position: position du fond
+intéressant si combiné avec background-repeat: no-repeat;
+background-position: 30px 50px;—> 30 de la gauche, 50 du haut
+possible aussi : top bottom left center right(mots combinables)
+
+
+superpropriété :
+body
+{
+    background: url("soleil.png") fixed no-repeat top right;
+}
+
+
+background: url("soleil.png") fixed no-repeat top right, url("neige.png") fixed;
+on sépare juste par une virgule ; la 1ere image au-dessus des autres
+
+
+opacity:0.6;
+—>opaque à 60%
+
+pour fond , mieux vaut utiliser
+background-color: rgba(255, 0, 0, 0.5);
+0.5 correspond à l’opacité
+
+
+—————————————————————————————————————————————————————————————————————————————————————————
+
+bordures :
+
+-border-width
+
+
+-border-color
+
+
+-border-style
+none: pas de bordure (par défaut)
+solid: un trait simple
+dotted: pointillés
+dashed: tirets
+double: bordure double
+groove: en relief
+ridge: autre effet relief
+inset: effet 3D global enfoncé
+outset: effet 3D global surélevé
+
+
+superpropriété :
+h1
+{
+    border: 3px blue dashed;
+}
+border-left, border-right, border-top, border-bottom
+
+
+border-top-width pour modifier l'épaisseur de la bordure du haut(aussi une superpropriété)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

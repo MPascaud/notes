@@ -4,7 +4,9 @@ Strerror
 
 ./filler_vm -f maps/map00 -p2 ./players/abanlin.filler -p1 ./players/carli.filler
 
-gcc -o mpascaud.filler mpascaud.filler.c ; ./filler_vm -p1 ./mpascaud.filler -p2 players/carli.filler -f maps/map00
+make re ; gcc -o mpascaud.filler mpascaud.filler.c filler.a ; ./filler_vm -p1 ./mpascaud.filler -p2 ./players/carli.filler -f maps/map00
+
+make re ; ./filler_vm -p1 ./mpascaud.filler -p2 ./players/carli.filler -f maps/map00
 
 
 il ecrit dans la sortie standart et perturbe la vm, il faut que tu utilise un autre file descriptor comme par exemple le tty d’une console (tu peux ecrire dans la console de ton choix avec ce systeme)
@@ -18,7 +20,7 @@ digit
 piece
 . Ou *
 
-Les -W-W-W
+Les -W-W-W<<<<<<<<<<<<<<——————————
 
 #define FDtest open("/dev/ttys001", O_RDWR)
 
@@ -32,3 +34,134 @@ data->war
 data->shapiece
 war = 0
 shapiece = 0
+
+
+les erreurs, coups de vice etc
+abort segfault
+enlever le sanitize
+
+qund je pose la derniere piece
+
+
+enlever le affichervariables
+
+quand on met qu un seul champion 
+
+
+
+les coordonnées negatives
+
+
+les leaks
+free move, heater
+
+le nom de l’exe
+affichervariables, placement impossible
+
+
+abanlin
+map 00
+p1 1/10
+p2 0/10
+
+map 01
+p1 0/10
+p2 0/10
+
+map 02
+p1 0/5
+p2 0/5
+————————————————————————————————————————————————————
+champely ?????????????????????????????????????????
+map 00
+p1
+p2
+
+map 01
+p1
+p2
+
+map 02
+p1
+p2
+————————————————————————————————————————————————————
+hcao
+map 00
+p1 0/10
+p2 1/10
+
+map 01
+p1 0/10
+p2 0/10
+
+map 02
+p1 0/5
+p2 0/5
+————————————————————————————————————————————————————
+carli
+map 00
+p1 0/10
+p2 0/10
+
+map 01
+p1 0/10
+p2 1/10
+
+map 02
+p1  0/5
+p2  0/5
+————————————————————————————————————————————————————
+grati
+map 00
+p1 0/10
+p2 0/10
+
+map 01
+p1 0/10 
+p2 0/10
+
+map 02
+p1 0/5
+p2 0/5
+————————————————————————————————————————————————————
+superjeannot
+map 00
+p1 0/10
+p2 0/10
+
+map 01
+p1 0/10
+p2 0/10
+
+map 02
+p1 0/5
+p2 0/5
+————————————————————————————————————————————————————
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

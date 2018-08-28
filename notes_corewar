@@ -1,0 +1,373 @@
+https://42-ai.slack.com/messages/DA9AQUX6J/
+https://drive.google.com/drive/folders/1jpI5jw4BaP_YONZJNpNAFqPqaO4FKzv7
+
+
+Keske
+
+Le parsing
+Compilation, assembleur
+VM
+
+
+Ka vm a option -n pour vue en nurses
+
+
+Assembleur vm et champion surs goinfre, répertoire corewar
+
+
+
+Séquentiellement
+
+
+Asm
+
+
+
+
+https://docs.google.com/spreadsheets/d/1pFwSCne-mh-u5ZLsjZS8VI9QvecYk-gWTyNaPstjpLE/edit#gid=0
+https://github.com/abrichar/corewar/blob/master/Corewar_Cheat_Sheet.pdf
+http://www.naa.fr/support/cnv_bin.html
+
+https://github.com/kgricour/corewar/blob/master/Makefile#L5
+https://github.com/abrichar/corewar
+
+
+
+Compilateur
+Assembleur
+Langage ass
+
+
+
+
+
+
+Std error
+
+
+
+
+
+
+—————————————————————————————————————————————————————————————
+
+
+
+
+
+
+ASSEMBLEUR
+
+
+Comprend le langage assembleur
+génère programmes en binaire
+
+corewar [-dump nbr_cycle] [[-n prog_number] [-a load_address ] prog_name] 
+
+./corewar [-dump nbr_cycles] [[-n number] champion1.cor] ...
+
+
+Plusieurs compilations en même temps = bonus ?
+
+VM
+
+Fournit aux Programmes des fonctionnalités pour combattre dans même espace mémoire 
+Jusqu’à 4 joueurs 
+
+
+Spécificités :
+#define CYCLE_TO_DIE 1536◦#define CYCLE_DELTA 4◦#define NBR_LIVE 2048
+Plusieurs instructions de différents cycles
+Optionnel : blocage des processus -ctmo, instruction ++ -gtmd qui fait patienter l’ouverture de la ram
+
+
+Chaque programme dispose de reg_number registres qui font reg_size octets (dans op.h)
+R1 = numéro du joueur; autres registres(sauf PC) = 0
+Chaque programme dispose d’un pc = registre qui contient l’adresse en mémoire
+Chaque programme dispose d’un carry qui est = 1 si dernière opération = 0.
+Eske carry peut redevenir = 0 ? <<<<<<<<————————————————————————
+
+
+VM vérifie que “live” pour tous les processus pendant cycle_to_die ; si non, on tue le processus ; dans tous les cas, on remet compteur de live à 0
+
+Tous les nbr_live live, cycle_to_die -= cycle_delta
+
+Si on n’a pas décrémenté CYCLE_TO_DIE depuis CYCLE_TO_DIE*MAX_CHECKS cycles, on décrémente.—>compteur de non-décrémentation, à remettre à 0 quand on a décrémenté cycle_to_die
+
+
+Note importante : la machine virtuelle est BIG ENDIAN (comme les Sun et non comme i386).
+
+
+CHAMPION
+
+Écrit dans le langage assembleur
+
+
+
+
+
+Autres
+
+Championnat aide à comprendre
+
+
+Donc a priori :
+Un compteur pour lives de chaque processus
+(Un pour chaque programme OU) un compteur de processus
+Un compteur de cycles
+
+si instruction avec registre inexistant —> processus crashe
+
+0x01 (live) + 4 octets(numéro du joueur) + 0 octet de codage
+
+0x02 (ld)  + 2 paramètres : 2e = registre(1 octet); valeur premier paramètre dans 2e ; carry modifié
+Exemple : ld 34,r3 charge les REG_SIZE OCTETS à partir de (PC + 34 % IDX_MOD) dans r3
+
+0x03 (st) idem que 0x02
+
+0x04 (add) : r1 + r2 = r3
+
+0x05 (sub) : r1 - r2 = r3
+
+0x06 (and) : n1p1 & n1p2 = registre
+
+0x07 (or) : idem avec | (OU)
+
+0x08 (xor) : idem avec xor
+
+0x09 (zjmp) : pas octet codage ; si Carry = 1 —> saut à index = PC + (valeur % IDX_MOD)
+Valeur contenue dans 2 octets (IND_SIZE)
+
+0x0a (ldi) : carry modifié (si retour = 0, carry = 1) ;
+
+Ldi 3,%4, r1
+1) on lit IND_SIZE octets à adresse (PC + (3%IDX_MOD) ; on ajoute 4—> = S
+2) on lit REG_SIZE octets à adresse (PC + (S%IDX_MOD) ; la valeur à l’adresse de S copiée dans r1
+
+0x0b (sti) : 
+
+
+Instruction = code instruction + description paramètres + paramètres
+
+Code instruction = (exemple)
+
+sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,
+		"store index", 1, 1},
+
+sti  r%%  1       :live           1
+0x0b,0x68,0x01, 0x00,0x0f, 0x00,0x01.  (Nombre d’octets de chaque paramètre dans op.c,
+Dernier paramètre, boulet)
+
+
+registre  direct direct  que 3 arguments = 68
+01         10      10      00
+
+
+sti                     r2,            %4,%5
+Copie REG_SIZE octet de r2 à l’adresse (4+5)
+
+
+
+0x0c (fork) : pas octet codage ; nouveau processus à partir de PC + paramètre
+Nouveau processus hérite différents états du père
+
+0x0d (lld) : comme ld sans %IDX_MOD ; carry modifié
+
+0x0e (lldi) : comme ldi sans %IDX_MOD ; carry modifié
+
+0x0f (lfork) : comme fork sans %IDX_MOD ; carry modifié
+
+0x10 (aff) : ! octet de codage pour un seul paramètre ! ; prend un registre et affiche
+caractère ascii (modulo 256 appliqué au code ascii, affichage sortie standard)
+
+Mémoire circulaire de MEM_SIZE octets.
+
+si code inexistant, on passe au suivant et on perd un cycle
+
+
+
+SCHEDULING
+
+instruction exécutée à fin dernier cycle
+
+
+Description paramètres : pour live, zjmp, fork et lfork, pas d’octet de codage - car 
+Un seul argument ; pour les autres, un seul octet de codage (paramètres)
+
+
+
+
+
+
+noter adresse de départ pour adressage absolu
+
+ordre des processus
+
+gestion ncurses
+interface graphique
+etc
+
+—————————————————————————————————————————————————————————————————
+
+
+
+bonus bruitage batte en mousse carl <<<<<<<<————————————————
+
+
+
+
+Enlever fsanitize
+les flags
+cas d’erreurs affiches asm
+
+
+statics
+
+
+le fichier en tant qu’argu
+
+
+
+l’image init counters etc
+
+
+
+explosivekitty
+ressources/champs/championships/2017/adenis/Explosive_Kitty.cor
+
+./ressources/asm ressources/champs/championships/2017/tbillard/Douceur_power.s;  make re ; ./ressources/corewar ressources/champs/championships/2017/adenis/Explosive_Kitty.cor ressources/champs/championships/2017/tbillard/Douceur_power.cor -Vncurses
+
+
+-n 2 a la fin
+-dump sans rien
+
+———————————————————————————————————————————————————————————————————————————————
+corewar.c
+void    ft_load_champ_in_vm(t_header *h, t_counters *c, t_param *pm)
+void    ft_init_period_lives(t_counters *c)
+int     ft_init_counters(t_counters *c, t_header *header, t_param *param)
+int     ft_new_process(t_processes *p, t_header *h)
+int     ft_add_process(t_processes *p, t_header *h, int proc_nbr)
+int     ft_init_processes(t_processes *p, t_header *h, t_param *param)
+int     ft_addr_start_2(t_param *param, int check)
+void    ft_addr_start(t_param *param, t_header *header, int i)
+void    ft_check_lives2(t_processes *p_start, t_counters *c)
+void    ft_check_lives(t_processes *p_start, t_counters *c)
+int     ft_at_least_one_process(t_processes *p)
+void    ft_show_winner(t_processes *p, t_counters *c, t_header *header, t_param *param)
+void    ft_vm(t_processes *p, t_counters *c, t_param *param, t_header *header)
+int     ft_read_champ(t_param *pm, t_header *h, char **argv)
+void    ft_final_free(t_processes *p, t_counters *c)
+void    ft_medium_free(t_processes *p, t_counters *c, t_header *header_first)
+int     ft_malloc_p_c(t_processes **p, t_counters **c)
+int     ft_init_vm(t_processes **p, t_counters **c, t_header *header, t_param *param)
+
+
+
+
+ft_dump
+int     *ft_get_pc(t_processes *p, t_counters *c)
+void    ft_color_vm(t_counters *c, t_processes *p, int *tab_pc, t_param *pm)
+void    ft_uncolor_vm(t_counters *c, t_processes *p, int *tab_pc, t_param *pm)
+void    ft_dump(t_counters *c, t_processes *p, t_param *pm)
+
+
+
+ft_get_opt
+int     ft_check_number_player(t_header *header, t_param *param)
+int     ft_is_exist(t_header *header, int nb)
+int     ft_get_player_opt(t_header *header, int argc, char **argv)
+int     ft_get_noopt(t_header *header, int argc, char **argv, t_param *param)
+void    ft_check_dump(t_param *pm)
+int     ft_nb_player(t_param *param, t_header **header)
+
+
+
+
+ft_init_free
+t_header    *ft_create_new_header(t_header *header)
+void        ft_free(t_header *header)
+int         ft_check_player(int fd, t_header *h)
+t_header    *ft_init(t_param *param, t_header **header, int ac, char **av)
+void        ft_init_color(t_counters *c)
+
+
+
+ft_ncurse
+void    ft_show_info_player(t_counters *c, t_processes *p, t_header *h, t_param *pm)
+void    ft_show_info_vm(t_counters *c, t_processes *p)
+void    ft_color_pc(t_counters *c, t_processes *p, int mode)
+void    ft_init_color_pc(void)
+void    ft_printw_memory(t_counters *c)
+void    ft_ncurse(t_counters *c, t_processes *p, t_param *param, t_header *h)
+
+
+
+ft_process
+void    ft_get_ocp(t_processes *p, t_counters *c, int op, int bin)
+void    ft_check_ocp(t_processes *p, t_counters *c, int op)
+int     ft_instruct_parse(t_processes *p, t_counters *c, int op)
+void    ft_get_op_instruct(t_processes *p, t_counters *c, t_header *h, t_param *pm)
+void    ft_check_op_instruct(t_processes *p, t_counters *c, t_header *h, t_param *pm)
+void    ft_decrement_wait(t_processes *p, t_counters *c)
+void    ft_process(t_processes *p, t_counters *c, t_param *pm, t_header *h)
+
+
+
+
+tool instruc
+int     ft_exist(unsigned int nbr_player, t_header *header)
+int     ft_take_parameter(t_processes *p, t_counters *c, int *i, int n)
+int     ft_read_ind(t_processes *p, t_counters *c, unsigned int first)
+int     ft_read_two(t_processes *p, t_counters *c, unsigned int first)
+void    ft_write_ind(t_processes *p, t_counters *c, int one, int two)
+
+
+
+
+
+
+
+
+
+
+mauvais caractère dans un label
+refererence à un label inexistant depuis un direct ou un indirect
+
+
+
+
+
+
+
+
+
+2014 hmoutaou
+2017 adenis explosi
+207 nolivier
+gnebie 17
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
