@@ -228,6 +228,332 @@ border-left, border-right, border-top, border-bottom
 border-top-width pour modifier l'épaisseur de la bordure du haut(aussi une superpropriété)
 
 
+bordure arrondie
+border-radius: 10px;
+border-radius: 10px 5px 10px 5px;(h-g h-d b-d b-g)
+
+
+courbes elliptiques 
+border-radius: 20px / 10px;
+
+
+ombres des boîtes
+box-shadow: 6px 6px 0px black (inset);
+décalage horizontal, vertical, adoucissement du dégradé, couleur, 5e facultative(inset)
+
+ombres des textes
+text-shadow : idem
+
+
+————————————————————————————————————————————————————————————————————————————————————————
+
+
+—>apparence dymamique au survol
+
+a /*non survolés*/
+{
+   
+}
+
+a:hover /* Apparence au survol des liens */
+{
+   text-decoration: underline;
+   color: green;
+}
+
+
+————
+
+
+—>apparence dymamique au clic et lors de la sélection
+
+
+a:active /* Quand le visiteur clique sur le lien */
+{
+    background-color: #FFCC66;
+}
+
+
+a:focus /* Quand le visiteur sélectionne le lien */
+{
+    background-color: #FFCC66;
+}
+
+
+
+
+————
+
+
+—>apparence dymamique lorsque lien déjà consulté
+
+a:visited /* Quand le visiteur a déjà vu la page concernée */
+{
+    color: #AAA; /* Appliquer une couleur grise */
+}
+
+—————————————————————————————————————————————————————————————————————————————————————————
+
+<header> : en-tête
+<footer> : pied-de-page
+<nav> : liens de navigation
+<section> : section de page
+<aside> : informations complémentaires
+<article> : article indépendant
+
+
+————————————————————————————————————————————————————————————————————————————————————————
+
+span est inline
+div est block
+
+———————
+
+width : largeur du bloc(en px ou %)
+height : hauteur du bloc(idem)
+
+min-width : largeur minimale
+min-height : hauteur minimale
+max-width : largeur maximale
+max-height : hauteur maximale
+
+
+———————
+
+
+padding : marge intérieure(en px, la plupart du temps)
+margin : marge extérieure(idem)
+
+margin-top margin-bottom margin-left margin-right
+padding-top padding-bottom padding-left padding-right
+
+margin: 2px 0 3px 1px
+haut droite bas gauche
+
+margin: 2px 1px
+2 haut bas, 1 gauche droite
+
+margin: auto;
+pour centrer
+
+
+
+
+——————
+
+couper un bloc
+
+overflow : visible(par défaut)
+texte reste visible
+
+overflow : hidden
+tmtc
+
+overflow : scroll
+on pourra faire défiler le texte
+
+overflow : auto
+barres de défilement si nécessaires
+
+
+
+textes trop larges
+
+word-wrap : break-word;
+
+
+
+—————————————————————————————————————————————————————————————————————————————————————————
+
+
+display : flex;
+
+
+flex-direction : row
+flex-direction : column
+flex-direction : row-reverse
+flex-direction : column-reverse
+
+
+flex-wrap : nowrap(pas de retour à la ligne)
+flex-wrap : wrap(retour à la ligne)
+flex-wrap : wrap-reverse(tmtc)
+
+
+sur l’axe principal(- ou |)
+justify-content : flex-start
+justify-content : flex-end
+justify-content : center
+justify-content : space-between
+justify-content : space-around
+
+
+sur l’axe secondaire
+align-items : stretch(par défaut)éléments étirés sur tout l’axe
+align-items : flex-start
+align-items : flex-end
+align-items : center
+align-items : baseline
+
+
+/*
+
+(triche)
+#conteneur
+{
+    display: flex;
+}
+
+.element
+{
+    margin: auto;
+}
+—>centrage vertical et horizontal
+
+*/
+
+
+
+pour faire une exception :
+align-self:blabla
+
+
+
+—————
+
+
+répartir plusieurs lignes
+
+align-content : flex-start
+align-content : flex-end
+align-content : center
+align-content : space-between
+align-content : space-around
+align-content : stretch(par défaut)
+
+
+
+
+
+——————
+
+
+ordonner de éléments
+order: 3;(ou 2 ou 1…)
+
+
+——————
+
+taille des éléments les uns par rapport aux autres
+flex:2;(par exemple)
+
+flex est une superpropriété
+
+
+
+————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+list-style-type: none;
+retire des puces
+
+————
+
+position:absolute
+position:relative
+position:fixed
+
+penser à la technique de absolu dans (absolu/fixe?)/relatif(place le bloc dans le bloc)
+
+
+right: 0px;
+idem avec bottom left top
+
+
+z-index:2
+pour déterminer qui se place au-dessus
+
+————
+
+inline-block ?
+
+display: block; ?
+
+
+—————————————————————————————————————————————————————————————————————————————————————————
+
+
+https://html5up.net/
+
+
+
+1)html
+
+2)css
+a-polices
+b-styles de la page
+c-en-tête et liens
+d-bannière
+e-secontion principale du corps de page
+f-pied-de-page
+
+
+
+absolu dans relatif
+
+
+list-style-image:url(‘photo.png’);
+image personnalisée plutôt que des puces
+
+
+linear-gradient ?
+
+
+——————
+
+
+https://validator.w3.org/
+
+
+
+Si vos liens comportent des &, vous devez les remplacer par le code &amp; pour éviter toute confusion au navigateur.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
