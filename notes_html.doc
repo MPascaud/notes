@@ -521,6 +521,328 @@ Si vos liens comportent des &, vous devez les remplacer par le code &amp; pour �
 
 
 
+——————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
+<table></table>
+de type bloc : à placer en dehors d’un paragraphe
+
+
+<tr></tr>
+ligne
+<th></th>
+ligne d’en-tête
+<td></td>
+cellule
+
+
+
+td /* Toutes les cellules des tableaux... */
+{
+    border: 1px solid black; /* auront une bordure de 1px */
+}
+
+
+border-collapse : collapse (bordures collées)
+border-separate : tmtc
+
+
+
+<caption></caption>
+titre du tableau
+à placer avant l’en-tête
+
+
+caption-side : top(titre au-dessus du tableau)
+caption-side : bottom(tmtc)
+
+
+
+
+—————————
+
+
+
+tableau structuré
+<thead></thead>
+<tfoot></tfoot>(mettre en 2e, idéalement)
+<tbody></tbody>
+
+
+
+———————
+
+
+fusion de cellules
+
+attribut dans la balise <td>
+<td colspan="2">fusion de 2 cellules, horizontalement
+<td rowspan="2">verticalement
+
+
+
+vertical-align : baseline
+vertical-align : top
+vertical-align : middle
+vertical-align : bottom
+vertical-align : [valeur en px ou %] distance alignement ligne de base
+permet de modifier l’alignement vertical du texte des cellules de tableaux
+
+
+
+
+
+
+—————————————————————————————————————————————————————————————————————————————————————————
+
+
+formulaires
+
+
+<form></form>
+
+il faut des balises de type bloc à l’intérieur, pour afficher du texte
+
+(attributs)
+method="get"
+envoi des données en transitant par la barre d’adresse, limité à 255 caractères
+method="post”
+permet d’envoyer un grand nombre d’infomations
+
+action="traitement.php"
+indique comment traiter les informations
+
+
+
+
+
+
+——————
+
+zones de saisie basiques
+
+<input />insérer zone de texte dans une ligne
+
+attribut “type” : 
+<input type="text" /> création d’une zone de texte à une ligne
+
+
+attribut “name” : nom à un élément de formulaire
+name="pseudo"
+
+
+<label></label> indique à l’utilisateur ce qu’il doit saisir
+attribut “for” dans le label, pour lier à un attribut “id” de <input/> 
+
+attributs
+size=agrandir le champ
+maxlength=limiter nombre caractères saisissables
+value=pré-remplir le champ avec une valeur par défaut
+placeholder=indication sur contenu du champ
+
+
+————
+
+
+type=“pasword” dans <input>
+
+
+————
+
+
+zone de texte multiligne
+
+<textarea> </textarea> à la place de <input>
+
+
+dimensions :
+css—>propriétés width et height au <textarea>
+attributs—>rows=nombre de lignes de texte, cols=nombre de colonnes
+
+on peut pré-remplir <textarea> sans passer par value
+
+
+
+
+
+———————
+
+<input type="email" />
+
+<input type="url" />
+
+<input type="tel" />(téléphone)
+
+<input type="number" />(nombre entier)
+min=valeur minimale autorisée
+max=tmtc
+step=pas de déplacement
+
+
+<input type="range" />
+nombre avec curseur
+min max step là aussi
+
+<input type="color" />
+
+dates :
+<input type="date" />
+<input type=“time” />
+<input type=“week” />
+<input type=“month” />
+<input type="datetime” /> date et heure avec gestion décalage horaire
+<input type="datetime-local” /> sans gestion
+
+
+<input type="search" />
+
+
+
+————
+
+cases à cocher
+
+<input type="checkbox" name="frites" id="frites" /> <label for="frites">Frites</label><br />
+
+
+<input type="checkbox" name="choix" checked />
+case cochée par défaut
+checked : attribut sans valeur
+
+
+—————
+
+zones d’option
+
+<input type="radio" name="age" value="moins15" id="moins15" /> <label for="moins15">Moins de 15 ans</label><br />
+radio
+les options d’un même groupe ont le même “name” (pour grouper), mais une “value” différente
+
+
+—————
+
+
+listes déroulantes
+
+<select> </select> début et fin de liste déroulante
+attribut name
+
+<option value="espagne">Espagne</option>
+<option value="royaume-uni">Royaume-Uni</option>
+etc
+
+
+attribut sans valeur “selected” pour sélection par défaut
+
+
+<optgroup> </optgroup>
+grouper options
+on ne peut pas sélectionner un groupe
+
+——————————————————
+
+
+envoi du formulaire
+
+<fieldset> pour regrouper les champs
+avec <legend> pour légende
+
+
+autofocus dans <input> pour sélectionner automatiquement un champ
+
+
+required pour champ obligatoire
+
+
+:required
+{
+    background-color: red;
+}
+change l’apparence d’un “required”(en css)
+
+
+idem avec invalid
+
+idem avec focus(quand curseur à l’intérieur)
+
+
+
+
+
+
+————
+bouton d’envoi
+
+<input type="submit" value="Envoyer" />
+<input type=“reset” value="Envoyer" />
+<input type=“image” value="Envoyer" />rajouter attribut src pour indiquer l’url
+<input type=“button” value="Envoyer" />
+
+
+
+
+
+——————————————————————————————————————————————————————————————————————————————————————————
+audio
+
+<audio src="musique.mp3"></audio>
+controls : lecture etc
+width : largeur de l’outil
+look : en boucle
+autoplay
+preload=auto, metadata(uniquement métadonnées), none
+
+message dans la balise pour ceux qui doivent maj
+
+
+
+<audio controls>
+    <source src="hype_home.mp3">
+    <source src="hype_home.ogg">
+</audio>
+pour plusieurs versions du fichier audio
+
+————————
+
+vidéo
+conteneur(mkv…)
+codec audio
+codec vidéo
+
+
+<video src="sintel.webm"></video>
+poster : image tant que vidéo non lancée
+controls
+width : largeur de la vidéo
+height : tmtc
+loop
+autoplay
+preload= auto, metadata, none
+
+
+message dans la balise pour ceux qui doivent maj
+
+
+<video controls poster="sintel.jpg" width="600">
+    <source src="sintel.mp4">
+    <source src="sintel.webm">
+    <source src="sintel.ogv">
+</video>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
