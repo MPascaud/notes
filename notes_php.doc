@@ -1,0 +1,96 @@
+
+
+
+
+php -S localhost:8080 - -docroot .
+localhost:8080/monfichierphp.php
+vi index.php
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+<?php ?>
+
+
+
+Echo “blabla”;
+
+
+<p>Aujourd'hui nous sommes le
+    <?php
+    date_default_timezone_set('Europe/Paris');
+    echo date('d/m/Y h:i:s');
+    ?>.
+</p>
+
+
+
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+phpinfo();
+
+
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+string
+int
+float(avec .)
+bool(true false)
+NULL
+
+
+$variable
+
+
+\’
+
+
+
+echo "Le visiteur a $age_du_visiteur ans";
+guillemets doubles —> variable remplacée
+
+
+
+echo 'Le visiteur a ' . $age_du_visiteur . ' ans';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
