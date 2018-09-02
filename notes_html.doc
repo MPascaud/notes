@@ -832,6 +832,102 @@ message dans la balise pour ceux qui doivent maj
 </video>
 
 
+—————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+media queries (pour <—résolution écran)
+
+
+1ere technique
+
+<link rel="stylesheet" href="style.css" />
+pour lier feuille css
+<link rel="stylesheet" media="screen and (max-width: 1280px)" href="petite_resolution.css" />
+pour lier aux petits écrans
+
+
+2e technique
+
+dans même fichier css
+@media screen and (max-width: 1280px)
+{
+    /* Rédigez vos propriétés CSS ici */
+}
+
+
+———————
+
+color
+height
+width
+device-height
+device-width
+orientation(portrait ou paysage) (exemple : “@media all and (orientation: portrait)”)
+media screen
+media handheld(mobile, mais seulement Opera le reconnaît)
+media print
+media tv
+media projection
+media all
+
+on peut rajouter “min-“ ou “max-“ devant ces règles
+
+on peut combiner ces règles avec “only” “and” “not”
+
+
+——————
+
+
+
+
+width: auto;
+
+display: none;—>hôte un élément
+
+
+aside p:last-child
+“le dernier paragraphe parmi les paragrapes du bloc aside”
+
+
+
+
+<meta name="viewport" content="width=320" />
+modifie la largeur du navigateur
+
+<meta name="viewport" content="width=device-width" />
+—>viewport = largeur de l’écran
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
