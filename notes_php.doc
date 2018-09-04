@@ -58,6 +58,553 @@ echo 'Le visiteur a ' . $age_du_visiteur . ' ans';
 
 
 
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+if (! $autorisation_entrer)
+
+
+switch($variable)
+{
+    case 1:
+         action;
+    break;
+
+    default:
+         action2;
+}
+
+
+$majeur = ($age >= 18) ? true : false;
+
+
+while
+
+
+for ($nombre_de_lignes = 1; $nombre_de_lignes <= 100; $nombre_de_lignes++)
+initialisation condition incrémentation
+
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+array
+
+
+$prenoms = array ('François', 'Michel', 'Nicole', 'Véronique', 'Benoît');
+
+$prenoms[0] = 'François';
+
+$prenoms[] = 'François'; // Créera $prenoms[0]
+—>php sélectionne automatiquement le numéro de case
+
+
+$coordonnees = array (
+    'prenom' => 'François',
+    'nom' => 'Dupont',
+    'adresse' => '3 Rue du Paradis',
+    'ville' => 'Marseille');
+
+
+$coordonnees['prenom'] = 'François';
+
+
+foreach($prenoms as $element)
+{
+    echo $element . '<br />'; // affichera $prenoms[0], $prenoms[1] etc.
+}
+
+
+foreach($coordonnees as $cle => $element)
+{
+    echo '[' . $cle . '] vaut ' . $element . '<br />';
+}
+?>
+
+
+echo '<pre>';
+print_r($coordonnees);
+echo '</pre>';
+—>affiche tous les éléments d’un array
+balise <pre> pour les retour à la ligne
+
+
+
+array_key_exists : vérifie que clé dans l’array
+if (array_key_exists('nom', $coordonnees))
+
+in_array : vérifie que valeur dans l’array
+if (in_array('Cerise', $fruits))
+
+array_search : récupère clé d’une valeur dans l’array
+$position = array_search('Banane', $fruits);
+echo '"Banane" se trouve en position ' . $position;
+
+
+http://fr.php.net/manual/fr/funcref.php
+—>fonctions php
+
+
+strlen
+str_replace (recherche et remplace)
+str_shuffle (mélange des lettres)
+strtolower (en minuscules)
+strtoupper
+date H i d m Y
+
+
+function DireBonjour($nom)
+
+
+————
+
+inclusions
+
+
+<?php include("menus.php"); ?>
+
+standards de codage
+https://www.php-fig.org/psr/psr-1/
+https://www.php-fig.org/psr/psr-2/
+
+
+
+
+
+
+—————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
+url 256 caractères max, généralement
+
+
+
+
+<a href="bonjour.php?nom=Dupont&amp;prenom=Jean">Dis-moi bonjour !</a>
+&amp car & en html
+
+
+—————
+
+récupérer paramètres
+
+
+$_GET
+
+
+<p>Bonjour <?php echo $_GET['prenom'] . ' ' . $_GET['nom']; ?> !</p>
+
+
+————
+
+
+isset()
+—>vérifie si une variable existe
+
+
+transtypage
+$_GET['repeter'] = (int) $_GET['repeter'];
+si pas de valeur (un str par exemple), php lui donne la valeur 0
+
+-vérifier que tous les paramètres sont présents
+-valeurs raisonnables
+
+
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+formulaires
+
+
+<form method="post" action="cible.php">
+get
+post
+
+method="post" la plupart du temps
+
+
+$_POST au lieu de $_GET
+
+
+
+
+<input type="text" />
+type="password"
+
+2 attributs :
+name
+value
+
+
+<input type="submit" value="Valider" />
+
+
+$_POST['prenom’]—>si l’attribut name=‘prenom’
+
+
+
+
+—————
+
+grandes zones de texte
+
+<textarea name="message" rows="8" cols="45">
+Votre message ici.
+</textarea>
+
+
+pas d’attribut value
+
+
+
+
+—————
+
+liste déroulante
+
+
+<select name="choix">
+    <option value="choix1">Choix 1</option>
+    <option value="choix2">Choix 2</option>
+    <option value="choix3">Choix 3</option>
+    <option value="choix4">Choix 4</option>
+</select>
+
+
+attribut selected="selected" à balise “option”—> choix par défaut
+
+
+
+—————
+
+
+
+<input type="checkbox" name="case" id="case" /> <label for="case">Ma case à cocher</label>
+label permet de cliquer sur le libellé pour cocher la case
+
+—> variable $_POST['case']
+
+
+si cochée, $_POST['case'] aura la valeur “on”
+sinon, $_POST['case'] n’existe pas
+
+
+checked="checked" pour case cochée par défaut
+
+
+—————
+
+
+boutons d’option
+
+
+<input type="radio" name="frites" value="oui" id="oui" checked="checked" /> <label for="oui">Oui</label>
+
+checked="checked"
+
+$_POST['frites']
+
+$_POST['frites'] = 'oui' si oui est coché
+
+
+
+—————
+
+champs cachés
+
+
+
+
+——————
+
+
+
+
+faille xss (cross-site scripting)
+injection de JS dans les pages
+solution : <p>Je sais comment tu t'appelles, hé hé. Tu t'appelles <?php echo htmlspecialchars($_POST['prenom']); ?> !</p>
+
+il faut protéger avec htmlspecialchars tout ce qui est susceptible d’être affiché(messages, pseudos…)
+
+
+
+——————
+
+envoi de fichiers
+
+
+ajouter enctypeblabla à la balise <form> :
+<form action="cible_envoi.php" method="post" enctype="multipart/form-data">
+    <p>Formulaire d'envoi de fichier</p>
+</form>
+
+
+ensuite
+<input type="file" name="monfichier" /><br />
+<input type="submit" value="Envoyer le fichier" />
+
+
+
+stocké dans un dossier temporaire
+si fichier bon, acceptation avec move_uploaded_file
+
+variable $_FILES['nom_du_champ']
+c’est un tableau :
+$_FILES['monfichier']['name']
+$_FILES['monfichier']['type']
+$_FILES['monfichier']['size']
+$_FILES['monfichier']['tmp_name']
+$_FILES['monfichier']['tmp_name'] (emplacement temporaire du fichier)
+$_FILES['monfichier']['error'] (vaut 0 si pas d’erreur)
+
+———
+
+verifications
+
+
+1)vérifier que fichier envoyé
+if (isset($_FILES['monfichier']) AND $_FILES['monfichier']['error'] == 0)
+
+2)vérifier taille
+if ($_FILES['monfichier']['size'] <= 1000000)
+
+
+3)vérifier extension (danger si .php)
+<?php
+$infosfichier = pathinfo($_FILES['monfichier']['name']);
+$extension_upload = $infosfichier['extension'];
+$extensions_autorisees = array('jpg', 'jpeg', 'gif', 'png');
+if (in_array($extension_upload, $extensions_autorisees))
+{
+}
+?>
+
+
+4)valider l’upload avec move_uploaded_file()
+2 paramètres :
+-nom temporaire du fichier $_FILES['monfichier']['tmp_name']
+-chemin(cad nom définitif), qui peut être le même
+
+
+'uploads/' . basename($_FILES['monfichier']['name']));
+—> basename extrait le nom du fichier
+
+
+
+chmod 733 sur dossier uploads
+
+
+https://openclassrooms.com/en/courses/1085676-upload-de-fichiers-par-formulaire
+
+
+
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+variables superglobales
+
+
+$_SERVER : valeurs renvoyées par le serveur
+$_SERVER['REMOTE_ADDR'] : adresse IP du client
+
+
+$_ENV : variables d’environnement
+
+
+$_SESSION : variables de session
+
+
+$_COOKIE : cookies enregistrés
+
+
+$_GET, $_POST, $_FILES
+
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+sessions
+
+
+PHPSESSID est l’ID de session
+
+timeout
+
+session_start()
+à mettre avant tout code
+session_destroy()
+
+
+<?php
+session_start();
+
+$_SESSION['prenom'] = 'Jean';
+$_SESSION['nom'] = 'Dupont';
+$_SESSION['age'] = 24;
+?>
+
+
+
+————
+
+cookies
+
+
+setcookie : pour écrire un cookie
+à placer avant tout code - comme sessionstart
+
+
+time() : pour connaître le timestamp
+
+<?php setcookie('pseudo', 'M@teo21', time()); ?>
+—>création du cookie
+
+<?php setcookie('pseudo', 'M@teo21', time() + 365*24*3600); ?>
+—>suppression dans un an
+
+
+——————
+
+sécuriser son cookie
+
+<?php setcookie('pseudo', 'M@teo21', time() + 365*24*3600, null, null, false, true); ?>
+la dernière valeur true active httpOnly, qui rend le cookie inaccessible en JS (au cas où on ait oublié htmlspecialchars
+
+
+
+———————
+
+$_COOKIE
+$_COOKIE['pseudo']
+
+
+——————
+
+on peut modifier un cookie en refaisant appel à setcookie, de la même façon
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
