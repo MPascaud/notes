@@ -492,6 +492,120 @@ on peut modifier un cookie en refaisant appel à setcookie, de la même façon
 
 
 
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+lire et écrire dans un fichier
+
+
+chmod, permissions de fichier, etc
+
+
+
+————
+
+
+ouvrir et fermer un fichier
+
+
+<?php
+// 1 : on ouvre le fichier
+$monfichier = fopen('compteur.txt', 'r+');
+
+// 2 : on lit la première ligne du fichier
+$ligne = fgets($monfichier);
+
+// 3 : quand on a fini de l'utiliser, on ferme le fichier
+fclose($monfichier);
+?>
+
+
+
+
+1)fopen
+r : lecture seule
+r+ : lecture + écriture
+a : écriture seule + création si fichier manquant
+a+ : tmtc (répertoire doit avoir chmod 777)
+
+
+
+
+2)opération
+
+
+3)fclose
+
+
+————
+
+fonction fgetc : lire caractère par caractère
+fgets : ligne par ligne - similaire à gnl
+
+
+
+
+écrire
+fputs
+<?php fputs($monfichier, 'Texte à écrire'); ?>
+
+
+fseek
+place le curseur au bon endroit - pratique pour écrire avec fputs
+
+
+
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+bases de données
+
+
+base
+tables
+champs, colonnes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+mongodb
+
+
+
+d’abord nodejs
+ensuite react
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

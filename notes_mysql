@@ -1,0 +1,287 @@
+bases de données
+
+
+base
+tables
+champs, colonnes
+
+
+SELECT 'Hello World !';
+
+
+; à la fin
+
+————
+
+commentaires
+—-(+espace)
+#
+
+
+————
+
+
+
+chaîne de caractères entourée par des apostrophes
+\n
+\t
+\
+
+doubles apostrophes pour en afficher un
+
+
+
+CREATE USER 'student'@'localhost' IDENTIFIED BY 'mot_de_passe';
+GRANT ALL PRIVILEGES ON elevage.* TO 'student'@'localhost';
+
+mysql -u utilisateur [-h hôte] -p
+—>se connecte
+
+
+SET NAMES 'utf8';
+à chaque connexion
+mysql -u student -p --default-character-set=utf8
+—>utf 8 par défaut
+
+
+
+interclassement :
+ordre des caractères
+sensibilité à la casse
+
+
+
+
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+TINYINT 1 octet
+SMALLINT 2
+MEDIUMINT 3
+INT 4
+BIGINT 8
+
+
+mysql sélectionne valeur la plus proche possible
+
+
+———
+
+UNSIGNED
+
+———
+
+INT(x)
+—>précise nombre de chiffres minimum à l’affichage
+
+ZEROFILL ajoute zéros à gauche
+
+INT(4) ZEROFILL
+
+———
+
+valeurs exactes
+
+nombres décimaux
+
+NUMERIC=DECIMAL
+
+NUMERIC(précision)
+DECIMAL(5) : 5 chiffres significatifs
+NUMERIC(précision, échelle)
+DECIMAL(5,3) : 5 chiffres significatifs, 3 chiffres après la virgule
+
+
+
+————
+
+valeurs approchées
+
+FLOAT supporte paramètres
+
+REAL (4 octets, mais 8 avec mysql) et DOUBLE (8 octets) supportent pas
+
+
+
+
+
+—————————
+
+types alphanumériques
+
+
+CHAR ET VARCHAR entre 1 et 255 caractères
+CHAR(x) : toujours x caractères
+VARCHAR(x) : jusqu’à x caractères
+
+VARCHAR stocke en plus la taille du texte stocké —> +1 octet que VAR, quand texte=taille max
+
+NB : si caractère accentué UTF-8, un char(5) peut faire plus de 5 octets
+
+
+
+
+——————
+
+
+TINYTEXT = 2^8 octets(longueur max) = longueur de la chaîne + 1 octet(mémoire occupée)
+TEXT / 2^16 / l+2
+MEDIUMTEXT / 2^24 / l+3
+LONGTEXT / 2^32 / l+4
+
+
+——————
+
+
+chaîne de type binaire
+->toujours sensible à la casse
+->tous les caractères sont utilisables
+
+
+BINARY(x)
+VARBINARY(x)
+
+chaînes plus longues : TINYBLOB, BLOB, MEDIUMBLOB, LONGBLOB
+
+
+mêmes limites de stockage que les types TEXT
+
+
+—————
+
+espece ENUM('chat', 'chien', 'tortue')
+—> colonne espece peut contenir les chaînes ‘chat’, ‘chien’, ‘tortue’, ’’(si chaîne non autorisée), NULL(si NULL autorisé)
+
+
+
+on remplit un ENUM soit avec la valeur, soit avec l’index de la valeur
+‘’ correspond à l’index 0
+
+
+—————
+
+
+espece SET('chat', 'chien', 'tortue')
+->on peut stocker entre 0 et 3 valeurs parmi cette liste
+
+
+64 valeurs définies max
+
+
+Pour éviter ENUM : colonne VARCHAR(x) inconvénient : pas de limite de valeurs entrées
+Pour éviter SET : une table reprend les catégories, une autre lie références aux catégories
+
+
+—————
+
+
+types temporels
+
+
+DATE, DATETIME, TIME, TIMESTAMP, YEAR
+
+
+DATE date 'AAAA-MM-JJ' (si AA, entre 1970 et 2069)
+TIME heure ‘J HH:MM:SS’ 'MM:SS' HHMMSS(nombre)
+DATETIME date + heure AAAAMMJJHHMMSS
+
+
+YEAR
+entre 1901 et 2155
+si AA, mêmes critères que DATE et DATETIME(exception : ’00’—>2000, 00—>0000)
+
+
+TIMESTAMP
+stocke le nombre de secondes, mais format est AAAAMMJJHHMMSS (format numérique)
+19 janvier 2038 à 3 h 14 min 7 s
+
+
+————
+
+si date/heure incorrectem valeur par défaut est stockée
+(exception, si TIME qui dépasse l’intervalle de validité, remplacé par plus proche (-838:59:59 ou 838:59:59))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
