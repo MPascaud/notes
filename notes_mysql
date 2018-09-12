@@ -202,6 +202,500 @@ si date/heure incorrectem valeur par défaut est stockée
 (exception, si TIME qui dépasse l’intervalle de validité, remplacé par plus proche (-838:59:59 ou 838:59:59))
 
 
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+éviter mots réservés
+
+
+
+——
+
+CREATE DATABASE elevage CHARACTER SET 'utf8';
+
+CREATE DATABASE nom_base;
+création
+
+
+DROP DATABASE elevage;
+suppression
+
+DROP DATABASE IF EXISTS elevage;
+
+
+SHOW WARNINGS;
+affiche les warnings
+
+
+USE elevage
+utiliser la base elevage
+
+
+mysql -u sdz -p elevage
+spécifier la base de données sur laquelle on bosse au démarrage
+
+
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+clés primaires
+
+
+colonne id
+
+PRIMARY KEY(id)
+
+AUTO_INCREMENT
+
+
+————
+
+ENGINE = moteur de table;
+
+cad ENGINE = INNODB;
+
+
+CREATE TABLE [IF NOT EXISTS] Nom_table (
+    colonne1 description_colonne1,
+    [colonne2 description_colonne2,
+    colonne3 description_colonne3,
+    ...,]
+    [PRIMARY KEY (colonne_clé_primaire)]
+)
+[ENGINE=moteur];
+
+
+espece VARCHAR(40) NOT NULL,
+
+
+espece VARCHAR(40) NOT NULL DEFAULT 'chien'
+
+
+id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT [PRIMARY KEY]
+
+
+
+CREATE TABLE Animal (
+    id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    espece VARCHAR(40) NOT NULL,
+    sexe CHAR(1),
+    date_naissance DATETIME NOT NULL,
+    nom VARCHAR(30),
+    commentaires TEXT,
+    PRIMARY KEY (id)
+)
+ENGINE=INNODB;
+
+
+————
+
+SHOW TABLES;
+
+DESCRIBE Animal;
+
+
+DROP TABLE Animal;
+
+
+innodb pour relations entre différentes tables
+
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+ALTER TABLE nom_table ADD ...
+ALTER TABLE nom_table DROP ...
+ALTER TABLE nom_table CHANGE ...
+ALTER TABLE nom_table MODIFY ...
+
+
+ALTER TABLE nom_table ADD [COLUMN] nom_colonne description_colonne;
+—>ajout d’une colonne
+si add sans rien, ajout d’une colonne
+
+
+ALTER TABLE nom_table DROP [COLUMN] nom_colonne;
+—>tmtc
+idem
+
+
+ALTER TABLE nom_table CHANGE ancien_nom nouveau_nom description_colonne;
+—>change nom colonne
+
+
+ALTER TABLE nom_table CHANGE ancien_nom nouveau_nom nouvelle_description;
+si pas de changement de nom : utiliser deux fois même nom
+
+
+ALTER TABLE nom_table MODIFY nom_colonne nouvelle_description;
+
+
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+insertion de ligne
+
+1)insertion sans préciser les colonnes
+
+INSERT INTO Animal VALUES (1, 'chien', 'M', '2010-04-05 13:43:00', 'Rox', 'Mordille beaucoup');
+
+INSERT INTO Animal VALUES (NULL , 'chat', 'F', '2010-09-13 15:02:00', 'Schtroumpfette', NULL);
+—> l’id NULL possible car id est défini comme clé primaire
+
+
+SELECT * FROM Animal;
+—>affichage de la table
+
+
+2)insertion en précisant les colonnes
+INSERT INTO Animal (espece, sexe, date_naissance) VALUES ('tortue', 'F', '2009-08-03 05:12:00');
+
+
+3)insertion multiple
+INSERT INTO Animal (espece, sexe, date_naissance, nom) VALUES ('chien', 'F', '2008-12-06 05:18:00', 'Caroline'), ('chat', 'M', '2008-09-11 15:38:00', 'Bagherra'), ('tortue', NULL, '2010-08-23 05:18:00', NULL);
+
+
+4)syntaxe alternative déconseillée :
+INSERT INTO Animal SET nom='Bobo', espece='chien', sexe='M', date_naissance='2010-07-21 15:41:00';
+
+
+————
+
+insérer données depuis fichier formaté
+
+SOURCE monFichier.sql;
+—>exécuter commandes à partir d’un fichier
+
+———
+
+
+nom;prenom;date_naissance
+Charles;Myeur;1994-12-30
+Bruno;Debor;1978-05-12
+Mireille;Franelli;1990-08-23
+
+dans un fichier.csv
+———
+
+si .csv :
+
+LOAD DATA [LOCAL] INFILE 'nom_fichier'
+INTO TABLE nom_table
+[FIELDS
+    [TERMINATED BY '\t']
+    [ENCLOSED BY '']
+    [ESCAPED BY '\\' ] —> caractère d’échappement
+]
+[LINES 
+    [STARTING BY '']    
+    [TERMINATED BY '\n']
+]
+[IGNORE nombre LINES]
+[(nom_colonne,...)];
+
+local pour spécifier client(local) ou serveur
+
+
+————
+
+
+LOAD DATA LOCAL INFILE ‘fichier.csv'
+INTO TABLE Personne
+FIELDS TERMINATED BY ';'
+LINES TERMINATED BY '\n' -- ou '\r\n' selon l'ordinateur et le programme utilisés pour créer le fichier
+IGNORE 1 LINES
+(nom,prenom,date_naissance);
+
+
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+select
+
+
+SELECT espece, nom, sexe FROM Animal;
+SELECT * from animal;
+
+
+SELECT * FROM Animal WHERE espece='chien';
+SELECT * FROM Animal WHERE date_naissance < '2008-01-01';
+
+
+SELECT * FROM Animal WHERE sexe='F' AND NOT espece='chien';
+not peut se remplacer par !
+
+
+SELECT * FROM Animal WHERE commentaires IS NOT NULL;
+SELECT * FROM Animal WHERE nom <=> NULL; -- sélection des animaux sans nom
+SELECT * FROM Animal WHERE nom IS NULL;
+
+
+—————————————
+
+tri des données
+
+order by quch
+SELECT * FROM Animal WHERE espece='chien' ORDER BY date_naissance;
+
+order by quch asc : trier de façon ascendante
+order by quch desc : tmtc
+
+possible : ORDER BY espece, date_naissance;
+
+
+SELECT DISTINCT espece FROM Animal;
+—>enlève les doublons
+
+———
+
+LIMIT 6 OFFSET 3;
+—> 6 lignes, depuis la 4e
+offset est facultatif(défaut : 0)
+
+
+déconseillé :
+SELECT * FROM Animal ORDER BY id LIMIT [decalage, ]nombre_de_lignes;
+
+
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+LIKE ‘b%’
+—> toutes les chaînes commençant pas ‘b’
+
+LIKE ‘b_’
+—> (“ba”, “bf”, “b8”, etc)
+
+'%ch%ne'
+'p_rl_'
+
+
+NOT LIKE
+
+
+binary
+SELECT * FROM Animal WHERE nom LIKE BINARY '%Lu%'; -- sensible à la casse
+
+
+like utilisable avec les int
+
+
+
+————
+
+intervalle
+
+BETWEEN 0 AND 100
+BETWEEN 'a' AND 'd'
+BETWEEN BINARY 'a' AND BINARY 'd'
+NOT BETWEEN
+
+
+—————
+
+in
+
+SELECT * FROM Animal 
+WHERE nom = 'Moka' 
+    OR nom = 'Bilba' 
+    OR nom = 'Tortilla' 
+    OR nom = 'Balou' 
+    OR nom = 'Dana' 
+    OR nom = 'Redbul' 
+    OR nom = 'Gingko';
+
+
+SELECT * FROM Animal WHERE nom IN ('Moka', 'Bilba', 'Tortilla', 'Balou', 'Dana', 'Redbul', 'Gingko');
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+sauvegarde
+
+mysqldump -u user -p --opt nom_de_la_base > sauvegarde.sql
+
+mysqldump -u mpascaud -p --opt elevage > elevage_sauvegarde.sql
+
+pour la reprendre :
+CREATE DATABASE nom_base
+puis : mysql nom_base < chemin_fichier_de_sauvegarde.sql
+(en l’occurence : mysql -u mpascaud -p elevage < elevage_sauvegarde.sql)
+
+———
+
+
+donc pour commandes sql depuis fichier externe :
+-source
+-load data
+- <
+
+
+———
+
+suppression
+
+
+DELETE FROM nom_table WHERE critères;
+DELETE FROM Animal WHERE nom = 'Zoulou';
+s’utilise comme select
+
+
+———
+
+modification
+
+UPDATE nom_table SET col1 = val1 [, col2 = val2, ...] [WHERE ...];
+UPDATE Animal SET sexe='F', nom='Pataude' WHERE id=21;
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+index
+
+
+index par la gauche : si on prend des sous-parties sans sauter de colonnes, les index existent déjà
+
+types d’index :
+
+SPATIAL ???
+
+UNIQUE
+pour membres
+pour combinaison nom + espèce
+
+FULLTEXT
+pour char, varchar ou text
+on ne peut plus utiliser l’indexage par la gauche —> si recherches fulltext sur deux colonnes, besoin de trois index (col1, col2, col1+col2)
+
+
+(si index sur BLOB ou TEXT—>préciser nombre caractères à prendre en compte)
+
+
+
+
+———————————
+
+création
+
+INDEX
+KEY
+
+ajout pendant création table
+méthodes
+1)
+colonne1 INT KEY,
+uniquement key/que unique, sans index ou key/pas index composites/pas sur une partie de la colonne
+
+2)
+CREATE TABLE nom_table (
+    colonne1 description_colonne1,
+    [colonne2 description_colonne2,
+    colonne3 description_colonne3,
+    ...,]
+    [PRIMARY KEY (colonne_clé_primaire)],
+    [INDEX [nom_index] (colonne1_index [, colonne2_index, …])]<<<<<<<<<<<<<<<——————————
+)
+[ENGINE=moteur];
+
+idem pour des index UNIQUE ou FULLTEXT
+
+“utiliser index partout, sauf dans la description même de la colonne(dans ce cas, key)”
+
+
+————
+
+ajout après la création de la table
+alter table = create index
+
+
+
+ALTER TABLE nom_table ADD INDEX [nom_index] (colonne_index [, colonne2_index ...]); --Ajout d'un index simple
+idem pour fulltext et unique
+
+
+
+CREATE INDEX nom_index
+ON nom_table (colonne_index [, colonne2_index ...]);  -- Crée un index simple
+
+idem pour fulltext
+
+
+
+————
+
+Complément pour la création d'un index UNIQUE - le cas des contraintes ???
+CONSTRAINT ???
+
+————
+
+suppression d’un index
+
+ALTER TABLE nom_table 
+DROP INDEX nom_index;
+
+
+
+
+
+
+
+
+
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+design.google.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
