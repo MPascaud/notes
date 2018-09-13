@@ -464,7 +464,7 @@ SELECT * FROM Animal ORDER BY id LIMIT [decalage, ]nombre_de_lignes;
 
 
 LIKE ‘b%’
-—> toutes les chaînes commençant pas ‘b’
+—> toutes les chaînes commençant par ‘b’
 
 LIKE ‘b_’
 —> (“ba”, “bf”, “b8”, etc)
@@ -615,8 +615,7 @@ idem pour fulltext et unique
 
 
 
-CREATE INDEX nom_index
-ON nom_table (colonne_index [, colonne2_index ...]);  -- Crée un index simple
+CREATE INDEX nom_index ON nom_table (colonne_index [, colonne2_index ...]);  -- Crée un index simple
 
 idem pour fulltext
 
@@ -634,6 +633,180 @@ suppression d’un index
 ALTER TABLE nom_table 
 DROP INDEX nom_index;
 
+
+
+
+————————————————
+
+recherches avec fulltext
+
+mot : lettres, chiffres, _ et ‘
+
+mots dans au moins moitié des lignes sont ignorés(règle des 50%)
+mots trop courts ignorés
+mots trop communs ignorés
+
+
+————
+
+
+recherche naturelle
+
+un seul mot suffit
+
+SELECT * FROM nom_table WHERE MATCH(colonne1[, colonne2, ...]) AGAINST ('chaîne recherchée');
+SELECT * FROM nom_table WHERE MATCH(colonne1[, colonne2, ...]) AGAINST ('chaîne recherchée' IN NATURAL LANGUAGE MODE);
+mais osef de préciser, car recherche naturelle par défaut
+
+
+affichage pertinence :
+SELECT *, MATCH(titre, auteur) AGAINST ('Jules Verne Lune') FROM Livre;
+
+
+————
+
+recherche avec booléens
+
+pas de règle des 50%
+possible sans index fulltext
+pas de tri par pertinence par défaut
+
+SELECT * FROM nom_table WHERE MATCH(colonne) AGAINST('chaîne recherchée' IN BOOLEAN MODE);
+SELECT * FROM Livre WHERE MATCH(titre) AGAINST ('+bonheur -ogres' IN BOOLEAN MODE);
+—> + : on exige qu’il y soit, - : tmtc
+SELECT * FROM Livre WHERE MATCH(titre) AGAINST ('"Terre à la Lune"' IN BOOLEAN MODE);
+—>groupe de mots
+d* —> tous les mots commençant par ‘d’
+
+
+
+—————
+
+recherche avec extension de requête
+
+simple recherche naturelle, suivie par seconde recherche naturelle avec les premiers résultats
+
+SELECT * FROM Livre WHERE MATCH(titre, auteur)AGAINST ('Daniel' WITH QUERY EXPANSION);
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+clés primaires et étrangères
+
+une clé primaire est un index unique, sur une ou plusieurs colonne(s), qui ne peut pas être null
+
+——
+
+à la création de la table
+
+méthode
+1)
+CREATE TABLE [IF NOT EXISTS] Nom_table (colonne1 description_colonne1 PRIMARY KEY [, colonne2 description_colonne2, colonne3 description_colonne3, ...,]
+)
+[ENGINE=moteur];
+
+2)
+CREATE TABLE [IF NOT EXISTS] Nom_table (
+    colonne1 description_colonne1 [,
+    colonne2 description_colonne2,
+    colonne3 description_colonne3,
+    ...],
+    [CONSTRAINT [symbole_contrainte]] PRIMARY KEY (colonne_pk1 [, colonne_pk2, ...]))
+[ENGINE=moteur];
+
+
+———
+
+après la création de la table
+
+ALTER TABLE nom_tableADD [CONSTRAINT [symbole_contrainte]] PRIMARY KEY (colonne_pk1 [, colonne_pk2, ...]);
+sur colonne qui ne contient pas null
+(create index non utilisable pour clés primaires)
+
+———
+
+suppression clés primaires
+
+ALTER TABLE nom_table DROP PRIMARY KEY
+
+
+———————————————————————————————————————————————————
+
+clés étrangères
+
+FOREIGN KEY : la ou les colonnes sur lesquelles on crée la clé
+REFERENCES : la ou les colonnes qui vont servir de référence
+
+————
+
+création avant
+
+CREATE TABLE [IF NOT EXISTS] Nom_table (colonne1 description_colonne1, [colonne2 description_colonne2, colonne3, description_colonne3, ...,]
+[ [CONSTRAINT [symbole_contrainte]]  FOREIGN KEY (colonne(s)_clé_étrangère) REFERENCES table_référence (colonne(s)_référence)])
+[ENGINE=moteur];
+
+CREATE TABLE Commande (
+    numero INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    client INT UNSIGNED NOT NULL,
+    produit VARCHAR(40),
+    quantite SMALLINT DEFAULT 1,
+    CONSTRAINT fk_client_numero
+	FOREIGN KEY (client)
+   	REFERENCES Client(numero) )
+ENGINE=InnoDB;
+
+————
+
+création après
+
+ALTER TABLE nom_table ADD CONSTRAINT fk_client_numero FOREIGN KEY (client) REFERENCES Client(numero);
+
+
+———
+
+suppression clé étrangère
+
+ALTER TABLE nom_table DROP FOREIGN KEY symbole_contrainte
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+jointures
+
+
+SELECT Espece.description FROM Espece INNER JOIN Animal ON Espece.id = Animal.espece_id WHERE Animal.nom = 'Cartouche';
+
+SELECT * FROM table1 INNER JOIN table2 ON table1.colonneA = table2.colonneJ AND table1.colonneT = table2.colonneX [AND ...];
+
+———————
+
+alias
+
+mot clé AS
+
+SELECT 5+3 AS Chiots_Cartouche;
+(ou SELECT 5+3 Chiots_Cartouche;)
+
+
+
+SELECT * FROM A INNER JOIN B ON A.key = B.key
+SELECT * FROM A LEFT JOIN B ON A.key = B.key
+SELECT * FROM A LEFT JOIN B ON A.key = B.key WHERE B.key IS NULL(left join sans l’intersection de B)
+SELECT * FROM A RIGHT JOIN B ON A.key = B.key
+SELECT * FROM A RIGHT JOIN B ON A.key = B.key WHERE B.key IS NULL(tmtc)
+SELECT * FROM A FULL JOIN B ON A.key = B.key
+SELECT * FROM A FULL JOIN B ON A.key = B.key OR B.key IS NULL
+
+
+—————
+
+syntaxes alternatives ???
+
+
+—————
+
+possible de joindre deux tables
+exemple :
+SELECT Animal.nom as nom_animal, Animal.sexe, Espece.nom_latin as espece, Race.nom as race FROM Animal INNER JOIN Espece ON Animal.espece_id = Espece.id LEFT JOIN Race ON Animal.race_id = Race.id WHERE Espece.nom_courant IN ('Perroquet amazone', 'Chat') ORDER BY Espece.nom_latin, Race.nom;
 
 
 
