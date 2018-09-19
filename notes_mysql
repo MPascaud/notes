@@ -792,7 +792,7 @@ SELECT * FROM A INNER JOIN B ON A.key = B.key
 SELECT * FROM A LEFT JOIN B ON A.key = B.key
 SELECT * FROM A LEFT JOIN B ON A.key = B.key WHERE B.key IS NULL(left join sans l’intersection de B)
 SELECT * FROM A RIGHT JOIN B ON A.key = B.key
-SELECT * FROM A RIGHT JOIN B ON A.key = B.key WHERE B.key IS NULL(tmtc)
+SELECT * FROM A RIGHT JOIN B ON A.key = B.key WHERE B.key  IS NULL(tmtc)
 SELECT * FROM A FULL JOIN B ON A.key = B.key
 SELECT * FROM A FULL JOIN B ON A.key = B.key OR B.key IS NULL
 
@@ -808,9 +808,150 @@ possible de joindre deux tables
 exemple :
 SELECT Animal.nom as nom_animal, Animal.sexe, Espece.nom_latin as espece, Race.nom as race FROM Animal INNER JOIN Espece ON Animal.espece_id = Espece.id LEFT JOIN Race ON Animal.race_id = Race.id WHERE Espece.nom_courant IN ('Perroquet amazone', 'Chat') ORDER BY Espece.nom_latin, Race.nom;
 
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+sous-requêtes
+
+
+possibles entre autres dans
+select
+insert
+update
+delete
+
+jointures sont plus rapides
+
+
+—————
+
+
+SELECT MIN(date_naissance)
+FROM (
+    SELECT Animal.id, Animal.sexe, Animal.date_naissance, Animal.nom, Animal.espece_id
+    FROM Animal
+    INNER JOIN Espece
+        ON Espece.id = Animal.espece_id
+    WHERE sexe = 'F'
+    AND Espece.nom_courant IN ('Tortue d''Hermann', 'Perroquet amazone')
+) AS tortues_perroquets_F;
+
+
+alias obligatoire
+
+MIN est une fonction qui cherche la valeur minimale d’une colonne.
+
+
+—————
+
+sous-requête renvoyant une valeur
+
+SELECT id, sexe, nom, commentaires, espece_id, race_id
+FROM Animal
+WHERE race_id = 
+    (SELECT id FROM Race WHERE nom = 'Berger Allemand');
+
+
+—————
+
+any = some = “au moins une des valeurs”
+
+all = tmtc
+
+attention : [SELECT id FROM Espece WHERE nom_courant = ANY ('Tortue d''Hermann', 'Perroquet amazone’);] est impossible
+
+
+—————
+
+exists
+not exists
+
+SELECT * FROM nom_table WHERE [NOT] EXISTS (sous-requête)
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+modifications de données
+
+
+INSERT INTO nom_table [(colonne1, colonne2, ...)] SELECT [colonne1, colonne2, ...] FROM nom_table2 [WHERE ...]
+
+
+?????
+?????
+?????
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+union
+
+SELECT ...
+UNION
+SELECT ...
+
+yfo même nombre de colonnes
+
+union = union distinct
+pour conserver les doublons : union all
+
+
+————
+
+limit
+
+SELECT id, nom, 'Race' AS table_origine FROM Race LIMIT 3
+UNION
+SELECT id, nom_latin, 'Espèce' AS table_origine FROM Espece;
+
+
+SELECT id, nom, 'Race' AS table_origine FROM Race
+UNION
+(SELECT id, nom_latin, 'Espèce' AS table_origine FROM Espece LIMIT 2);
+—>pour limiterla 2e requête ; sinon—>le résultat final est limité
+
+
+————
+
+order by
+
+SELECT id, nom, 'Race' AS table_origine FROM Race UNION SELECT id, nom_latin, 'Espèce' AS table_origine FROM Espece ORDER BY nom DESC;
+
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+options clés étrangères
+
+ALTER TABLE nom_table
+ADD [CONSTRAINT fk_col_ref]         
+    FOREIGN KEY (colonne)            
+    REFERENCES table_ref(col_ref)
+    ON DELETE {RESTRICT | NO ACTION | SET NULL | CASCADE};  
 
 
 
+restrict : si on essaie de supprimer une valeur référencée par une clé étrangère : erreur
+restrict = no action - dans mysql
+
+set null : null remplace les valeurs dont la référence est supprimée
+
+cascade : supprime toutes les lignes qui référençaient la valeur supprimée
+
+
+—————
+
+option sur modification des clefs étrangères
+
+
+
+ON UPDATE {RESTRICT | NO ACTION | SET NULL | CASCADE}
+
+restrict = no action = empêche modification si elle casse la contrainte
+
+set nul = met null partout où valeur était référencée
+
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+violation de contrainte d’unicité ???
 
 
 
